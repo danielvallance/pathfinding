@@ -148,7 +148,7 @@ def main():
     if (destination.parent == None):
         print("Could not find a path from start to destination.")
     else:
-        print("This is the shortest path from the start to the destination\n")
+        print("This is a path from the start to the destination\n")
         
         current_tile = destination
         coordinates = []
@@ -157,13 +157,13 @@ def main():
         # Also record the coordinates
         while(current_tile != None):
             current_tile.symbol = 'O'
-            coordinates.insert(0, "[" + str(current_tile.x) + "," + str(current_tile.y) +"]") 
+            coordinates.insert(0, "(" + str(current_tile.x) + "," + str(current_tile.y) + ")") 
             current_tile = current_tile.parent   
             
         # Print the grid, coordinates and length of path
         print_grid(grid, GRID_SIZE)
         print()
-        print("(" + ",".join(coordinates) + ")\n")
+        print("[" + ",".join(coordinates) + "]\n")
         print("This is " + str(len(coordinates) - 1) + " steps")
 
 # Run the main function if this file is being directly run
