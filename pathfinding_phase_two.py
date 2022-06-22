@@ -4,8 +4,8 @@ import random
 
 # Scenario:
 # There is a self-driving vehicle operates on a 10x10 grid
-# This program finds the shortest route from start (0,0) to destination 
-# (9,9) while avoiding obstacles on (9,7), (8,7), (6,7) and (6,8)
+# This program finds attempts to find a route from start (0,0) to destination 
+# (9,9) while avoiding obstacles on (9,7), (8,7), (6,7) and (6,8) and 20 random additional obstacles
 
 # The A* algorithm was used to solve this problem as the heuristic used to check
 # paths which are likely to be shorter first saves time
@@ -28,7 +28,7 @@ class Tile:
         self.g = -1
 
         # h represents the result of the heuristic estimating how far the tile is from the destination
-        self.h = -1
+        self.h = self.diagonal_distance(9,9)
 
     def f(self):
         """f simply returns the sum of how long the current path is (g), and how long is estimated to go(h)"""
@@ -53,12 +53,10 @@ def print_grid(grid, GRID_SIZE):
             print('[' + grid[x][y].symbol + ']', end=" ")
         print ('\n', end="")
 
-def find_path(start, destination, grid, GRID_SIZE, OBSTACLE):
+def find_path(start, destination, grid, GRID_SIZE, OBSTACLE, PATH):
     """Sets the parent references of the tiles so if there is a shortest path 
        from the start to the destination, it is represented as a linked list using
        the parent references"""
-
-    PATH = 'O'
 
     # The open_paths list keeps track of tiles which have a possible path to 
     # the destination, which will initially just be the start tile
@@ -103,9 +101,6 @@ def find_path(start, destination, grid, GRID_SIZE, OBSTACLE):
                     destination.parent = current_tile
 
                     return                    
-
-                # Calculate heuristic (diagonal distance) of how far away neighbour is from the destination 
-                neighbour.h = neighbour.diagonal_distance(9,9)
 
                 # If the neighbour is not already part of a shorter path, represented by smaller distance from start square (g)
                 if (neighbour.g == -1 or neighbour.g > current_tile.g + 1):
@@ -158,6 +153,7 @@ def main():
     EMPTY = ' '
     OBSTACLE = 'X'
     GRID_SIZE = 10
+    PATH = 'O'
 
     # Loads the grid with Tile objects
     grid = [[Tile(EMPTY, x, y) for y in range(GRID_SIZE)] for x in range(GRID_SIZE)]
@@ -175,7 +171,7 @@ def main():
     load_obstacles(grid, 20, start, destination, GRID_SIZE, OBSTACLE)
 
     # Create linked list using parent references in the tile objects to represent the shortest path from start to destination, if one exists
-    find_path(start, destination, grid, GRID_SIZE, OBSTACLE)
+    find_path(start, destination, grid, GRID_SIZE, OBSTACLE, PATH)
 
     # If the destination's parent reference is None, there is no valid path from the start to the destination
     if (destination.parent == None):
