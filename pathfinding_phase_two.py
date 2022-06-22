@@ -136,14 +136,21 @@ def load_obstacles(grid, n, start, destination, GRID_SIZE, OBSTACLE):
     # possible by setting n so that every potential tile will have an obstacle
     if (length < n):
         n = length
+
+    coordinates = []
     
     # Place n obstacles on the grid by choosing a random option to put an obstacle 
     # on, then removing it as an option and repeating this n times
     for i in range(n):
         chosen_tile = options[random.randrange(length)]
         chosen_tile.symbol = OBSTACLE
+        coordinates.append("(" + str(chosen_tile.x) + "," + str(chosen_tile.y) + ")")
         options.remove(chosen_tile)
         length = length-1
+
+    # Print obstacle locations
+    print("In addition to the obstacles at (9,7), (8,7), (6,7) and (6,8), more obstacles were placed at:")
+    print("[" + ",".join(coordinates) + "]\n") 
 
 def main():
     """Prints the grid, and the optimal path the self driving car will take from start to destination while avoiding the obstacles"""
@@ -174,7 +181,7 @@ def main():
     if (destination.parent == None):
         print("Could not find a path from start to destination.")
     else:
-        print("This is the shortest path from the start to the destination\n")
+        print("This is a path from the start to the destination\n")
         
         current_tile = destination
         coordinates = []
@@ -183,13 +190,13 @@ def main():
         # Also record the coordinates
         while(current_tile != None):
             current_tile.symbol = 'O'
-            coordinates.insert(0, "[" + str(current_tile.x) + "," + str(current_tile.y) +"]") 
+            coordinates.insert(0, "(" + str(current_tile.x) + "," + str(current_tile.y) +")") 
             current_tile = current_tile.parent   
             
         # Print the grid, coordinates and length of path
         print_grid(grid, GRID_SIZE)
         print()
-        print("(" + ",".join(coordinates) + ")\n")
+        print("[" + ",".join(coordinates) + "]\n")
         print("This is " + str(len(coordinates) - 1) + " steps")
 
 # Run the main function if this file is being directly run
