@@ -179,7 +179,8 @@ def main():
 
     # If the destination's parent reference is None, there is no valid path from the start to the destination
     if (destination.parent == None):
-        print("Could not find a path from start to destination.")
+        print_grid(grid, GRID_SIZE)
+        print("\nCould not find a path from start to destination.")
     else:
         print("This is a path from the start to the destination\n")
         
