@@ -1,0 +1,15 @@
+Self Reflection of Amazon Pathfinding Coding challenge
+
+Numeracy: I could have represented a diagonal move with a weight of sqrt(2) instead of just a weight of 1. This would lead to a more accurate asseessment of which paths are shorter. 2/4
+
+Research: As this task was fairly simple and I was already aware of the A* algorithm, extensive research was not necessary
+
+Knowledge and comprehension: I had a good knowledge of the A* algorithm which was very helpful for this task. Additionally, my comprehension of it was 
+                              useful too as that meant I could adapt it to include finding paths which go through minimal obstacles in the case where there 
+                              is no unobstructed path between the start and destination in the bonus task. 4/4
+                              
+Problem solving, analysis and evaluation: When adapting the A* algorithm to include paths with minimal obstacles in cases where there is no unobstructed path, I
+                              analysed which parts I needed to change effectively and this saved me time. I thought it was a good example of problem solving. 4/4
+                             
+Presentation: I made a point to print the grids with symbols which indicate a path, empty square, obstacle and traversed obstacle to present the path well. 3/4
+
